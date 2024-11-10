@@ -30,9 +30,6 @@ export function Menu() {
           <MenubarItem>
             Hide Music... <MenubarShortcut>⌘H</MenubarShortcut>
           </MenubarItem>
-          <MenubarItem>
-            Hide Others... <MenubarShortcut>⇧⌘H</MenubarShortcut>
-          </MenubarItem>
           <MenubarShortcut />
           <MenubarItem>
             Quit Music <MenubarShortcut>⌘Q</MenubarShortcut>
