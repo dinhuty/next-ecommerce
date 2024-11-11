@@ -1,12 +1,26 @@
-FROM node:18-alpine AS base
 
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
+FROM node:20.18.0-alpine as base
 
 WORKDIR /app
 
-COPY package.json .
+FROM base as builder
 
+RUN apk add --no-cache curl \ 
+    && curl -sf https://gobinaries.com/tj/node-prune | sh -s -- -b /usr/local/bin \
+    && apk del curl
+
+COPY . .
 RUN npm i
+RUN npm run build
 
+FROM base as production
+
+ENV NODE_ENV production
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
