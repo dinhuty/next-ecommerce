@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,15 +21,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  auth,
 }: Readonly<{
   children: React.ReactNode;
+  auth: React.ReactNode;
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="container h-full mx-auto">{children}</div>
+        <div className="container h-full mx-auto">
+          <div className="flex flex-row gap-3 p-2 rounded-sm bg-blue-600 text-white">
+            <Link href="/" className="underline">
+              Home page
+            </Link>
+            <Link href="/login" className="underline">
+              Login
+            </Link>
+          </div>
+          <div className="">{children}</div>
+          <div className="">{auth}</div>
+          <div className="">Footer</div>
+        </div>
       </body>
     </html>
   );
