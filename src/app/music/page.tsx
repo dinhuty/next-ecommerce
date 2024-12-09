@@ -50,7 +50,7 @@ export default function MusicPage() {
                     <div className="space-between flex items-center">
                       <TabsList>
                         <TabsTrigger value="music" className="relative">
-                          Music
+                          Music1
                         </TabsTrigger>
                         <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
                         <TabsTrigger value="live" disabled>
